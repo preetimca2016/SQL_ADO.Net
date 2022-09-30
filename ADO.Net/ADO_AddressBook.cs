@@ -14,7 +14,7 @@ namespace ADO.Net
         /// Establish Connection using connection string
         /// </summary>
         public static string ConnectionString = @"Data Source=(localdb)\ProjectModels;Initial Catalog=AddressBook_ServiceDB;Integrated Security=True";
-        public static void GetAllEmployees()
+        public static void DataBaseConnection()
         {
             SqlConnection connection = null;
             try
