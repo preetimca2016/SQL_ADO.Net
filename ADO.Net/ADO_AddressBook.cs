@@ -88,6 +88,7 @@ namespace ADO.Net
             SqlConnection connection = null;
             try
             {
+                string query = "select * from AddressBookDB";
                 //AddressBook_Contacts contacts = new AddressBook_Contacts();
                 connection = new SqlConnection(ConnectionString);
                 SqlCommand command = new SqlCommand("dbo.sp_AddEmployee", connection);
@@ -97,7 +98,7 @@ namespace ADO.Net
                 command.Parameters.AddWithValue("@Phone", contacts.PhoneNumber);
                 int num = command.ExecuteNonQuery();
                 if(num!=0)
-                    Console.WriteLine("Employee Added Successfully");
+                    Console.WriteLine("Employee Updated Successfully");
                 else
                 {
                     Console.WriteLine("Something Went Wrong");
@@ -105,6 +106,37 @@ namespace ADO.Net
                 connection.Open();
             }
             catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        public static void UpdateEmployee(AddressBook_Contacts contacts)
+        {
+            SqlConnection connection = null;
+            try
+            {
+                string query = "select * from AddressBookDB";
+                //AddressBook_Contacts contacts = new AddressBook_Contacts();
+                connection = new SqlConnection(ConnectionString);
+                SqlCommand command = new SqlCommand("dbo.sp_UpdateEmployee", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Name", contacts.FirstName);
+                command.Parameters.AddWithValue("@Address", contacts.Address);
+                command.Parameters.AddWithValue("@Id", contacts.EmployeeId);
+                int num = command.ExecuteNonQuery();
+                if (num != 0)
+                    Console.WriteLine("Employee Added Successfully");
+                else
+                {
+                    Console.WriteLine("Something Went Wrong");
+                }
+                connection.Open();
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

@@ -1,8 +1,7 @@
-﻿CREATE PROCEDURE sp_AddEmployee
+﻿CREATE PROCEDURE sp_UpdateEmployee
 @Name nvarchar(200),
 @Address nvarchar(200),
-@Phone bigint
+@Id int
 AS
-INSERT INTO AddressBook_DB (FirstName,Address, Phone)
-								values(@Name,@Address,@Phone)
-EXEC sp_AddEmployee 'ABC','GURUGRAM', 34548947
+Update AddressBookDB set Address=@Address WHERE FirstName=@Name and EmployeeId=@Id
+EXEC sp_UpdateEmployee 'Dhoni','GURUGRAM', 3

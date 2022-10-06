@@ -9,6 +9,7 @@ namespace ADO.Net
     public class AddressBook_Contacts
     {
         // property
+        public int EmployeeId { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }

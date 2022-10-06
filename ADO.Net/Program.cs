@@ -14,12 +14,13 @@ namespace ADO.Net
             {
                 FirstName = "Preeti",
                 Address="Delhi",
-                PhoneNumber=3439543543
+                EmployeeId = 3
             };
             Console.WriteLine("Welcome To ADO.NET");
             Console.WriteLine("Enter 1 for Connection checking");
             Console.WriteLine("Enter 2 Get All the Employee detail feom database table");
             Console.WriteLine("Enter 3 for Add Employee details");
+            Console.WriteLine("Enter 4 for Update Employee details");
             int input = Convert.ToInt32(Console.ReadLine());
             switch (input)
             {
@@ -31,6 +32,9 @@ namespace ADO.Net
                     break;
                 case 3:
                     ADO_AddressBook.AddEmployee(contacts);
+                    break;
+                case 4:
+                    ADO_AddressBook.UpdateEmployee(contacts);
                     break;
             }
 
