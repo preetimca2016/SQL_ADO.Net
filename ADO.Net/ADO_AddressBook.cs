@@ -83,5 +83,35 @@ namespace ADO.Net
                 Console.WriteLine(ex.Message);
             }
         }
+        public static void AddEmployee(AddressBook_Contacts contacts)
+        {
+            SqlConnection connection = null;
+            try
+            {
+                //AddressBook_Contacts contacts = new AddressBook_Contacts();
+                connection = new SqlConnection(ConnectionString);
+                SqlCommand command = new SqlCommand("dbo.sp_AddEmployee", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Name", contacts.FirstName);
+                command.Parameters.AddWithValue("@Address", contacts.Address);
+                command.Parameters.AddWithValue("@Phone", contacts.PhoneNumber);
+                int num = command.ExecuteNonQuery();
+                if(num!=0)
+                    Console.WriteLine("Employee Added Successfully");
+                else
+                {
+                    Console.WriteLine("Something Went Wrong");
+                }
+                connection.Open();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
