@@ -119,7 +119,7 @@ namespace ADO.Net
             SqlConnection connection = null;
             try
             {
-                string query = "select * from AddressBookDB";
+                string query = "select * from AddressBook_DB";
                 //AddressBook_Contacts contacts = new AddressBook_Contacts();
                 connection = new SqlConnection(ConnectionString);
                 SqlCommand command = new SqlCommand("dbo.sp_UpdateEmployee", connection);
@@ -130,6 +130,37 @@ namespace ADO.Net
                 int num = command.ExecuteNonQuery();
                 if (num != 0)
                     Console.WriteLine("Employee Added Successfully");
+                else
+                {
+                    Console.WriteLine("Something Went Wrong");
+                }
+                connection.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        public static void DeleteEmployee(AddressBook_Contacts contacts)
+        {
+            SqlConnection connection = null;
+            try
+            {
+                string query = "select * from AddressBook_DB";
+                //AddressBook_Contacts contacts = new AddressBook_Contacts();
+                connection = new SqlConnection(ConnectionString);
+                SqlCommand command = new SqlCommand("dbo.sp_DeleteEmployee", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Name", contacts.FirstName);
+                command.Parameters.AddWithValue("@Address", contacts.Address);
+                command.Parameters.AddWithValue("@Id", contacts.EmployeeId);
+                int num = command.ExecuteNonQuery();
+                if (num != 0)
+                    Console.WriteLine("Employee deleted Successfully");
                 else
                 {
                     Console.WriteLine("Something Went Wrong");
